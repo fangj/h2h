@@ -31,10 +31,18 @@
 </script>
 
 <script >
+	var html_old=$("#html-old").html();
+	var mapping_rules={
+		version:1,
+		mapping:{
+			"h3":"title",
+			"code":"body"
+		}
+	}
+	var data=h2h.html2data(html_old,mapping_rules);
 	var template   = $("#entry-template").html();
-	var data=h2h.html2data();
-	var html=h2h.data2html(data,template,handlebars_adapter);
-	$("#html-new").html(html);
+	var html_new=h2h.data2html(data,template,handlebars_adapter);
+	$("#html-new").html(html_new);
 </script>
 
 </body>
