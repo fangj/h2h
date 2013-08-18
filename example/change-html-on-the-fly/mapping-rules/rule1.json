@@ -1,0 +1,7 @@
+{
+		"version":1,
+		"mapping":{
+			".headline":"title",
+			".story":"body"
+		}
+	}

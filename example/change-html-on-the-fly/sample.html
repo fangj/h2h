@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Html2Html Sample</title>
+	<script src="js/jquery-1.10.2.js"></script>
+	<script src="js/template_engine/handlebars.js" ></script>
+	<script src="js/jquery.xdomainajax.js"></script>
+	<script src="html2html.js"></script>
+</head>
+<body>
+
+<div id="html-new" />
+
+<script type="text/javascript">
+	var handlebars_adapter=function(data,template){
+		var compiled_template = Handlebars.compile(template);
+		var html    = compiled_template(data);
+		return html;
+	}
+	var wait = function(callbacks, done) {
+	   var counter = callbacks.length;
+	   var next = function() {
+	      if(--counter == 0) {
+	         done();
+	      }
+	   };
+	   for(var i = 0; i < callbacks.length; i++) {
+	      callbacks[i](next);
+	   }
+	}
+	function download(link,results){
+		var a = function (next) {
+		   jQuery.get(link, function(res){
+	        	results[link]=res.responseText;
+	        	next();
+	    	});
+	  	};
+	  	return a;
+  	}
+</script>
+
+<script >
+results={};
+downloadHtml=download('http://www.bbc.co.uk/news/',results);
+wait([downloadHtml],done);
+function done(){
+	 html_old=results['http://www.bbc.co.uk/news/'];
+	console.log("html_old:"+html_old);
+	 mapping_rules=$.ajax({ url: "mapping-rules/rule1.json", async: false}).responseText;
+	 data=h2h.html2data(html_old,mapping_rules);
+	 template   = $.ajax({ url: "template/template1.html", async: false}).responseText;
+	 html_new=h2h.data2html(data,template,handlebars_adapter);
+	$("#html-new").html(html_new);
+}
+</script>
+
+</body>
+</html>
