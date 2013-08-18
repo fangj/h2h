@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Html2Html Sample</title>
+	<script src="jquery-1.10.2.js"></script>
+	<script src="template_engine/handlebars.js" ></script>
+	<script src="html2html.js"></script>
+</head>
+<body>
+	<div id="html-old">
+		<h3>boy</h3>
+		<code>hello world</code>
+	</div>
+	<div id="html-new" />
+
+<script id="entry-template" type="text/x-handlebars-template">
+  <div class="entry">
+	  <h1>{{title}}</h1>
+	  <div class="body">
+	    {{body}}
+	  </div>
+	</div>
+</script>
+<script type="text/javascript">
+	var handlebars_adapter=function(data,template){
+		var compiled_template = Handlebars.compile(template);
+		var html    = compiled_template(data);
+		return html;
+	}
+</script>
+
+<script >
+	var template   = $("#entry-template").html();
+	var data=h2h.html2data();
+	var html=h2h.data2html(data,template,handlebars_adapter);
+	$("#html-new").html(html);
+</script>
+
+</body>
+</html>
