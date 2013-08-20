@@ -21,18 +21,13 @@
 </script>
 
 <script >
-
-links=["http://www.bbc.co.uk/news/","mapping-rules/rule1.json","template/template1.html"];
-results={};
-h2h.downloadLinks(links,results,done);
-function done(){
-	 html_old=results["http://www.bbc.co.uk/news/"];
-	 mapping_rules=results["mapping-rules/rule1.json"];	 
-	 template   = results["template/template1.html"];
-	 data=h2h.html2data(html_old,mapping_rules);
-	 html_new=h2h.data2html(data,template,handlebars_adapter);
-	$("#html-new").html(html_new);
-}
+h2h.links2html("http://www.bbc.co.uk/news/"
+	,"mapping-rules/rule1.json"
+	,"template/template1.html"
+	,handlebars_adapter
+	,function(html_new){
+		$("#html-new").html(html_new);
+	});
 </script>
 
 </body>

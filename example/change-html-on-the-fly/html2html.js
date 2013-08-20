@@ -22,6 +22,9 @@
 	var data2html=function(data,template,adapter){
 		return adapter(data,template);
 	};
+	var html2html=function(html,mapping_rules,template,adapter){
+		return data2html(html2data(html,mapping_rules),template,adapter);
+	};
 	var wait = function(callbacks, done) {
 	   var counter = callbacks.length;
 	   var next = function() {
@@ -54,10 +57,24 @@
   		};
   		wait(downloaders,done);
   	};
+  	var links2html=function(html,mapping_rules,template,adapter,onFinish){  		
+		var  done=function(){
+			 html_old=results[html];
+			 mapping_rules=results[mapping_rules]	 
+			 template   = results[template];
+			 data=h2h.html2data(html_old,mapping_rules);
+			 html_new=h2h.data2html(data,template,adapter);
+			 onFinish(html_new);
+		};
+		links=[html,mapping_rules,template];
+		results={};
+		downloadLinks(links,results,done);
+  	};
 	h2h={
 		html2data:html2data,
 		data2html:data2html,
-		downloadLinks:downloadLinks
+		html2html:html2html,
+		links2html:links2html
 	};
 	outside.h2h=h2h;
 })(this);
