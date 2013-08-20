@@ -1,10 +1,25 @@
 rule:={
 	version,
-	mapping
+	mappings
 }
 
-mapping:={
-	html:nameH1, //current node's html
-	attr:{attr1:nameA1,attr2:nameA2}, //current node's attributes
-	selector:nameS1/mapping //Descendant node's html or mapping
+mappings:=[
+	mapping [1..*]
+]
+
+mapping:=[
+	selector:name
+]
+
+or
+
+mapping:=[
+	selector:sub_selector
+]	
+
+sub_selector:={
+	name,
+	html [0..1],
+	@attribute [0..*],
+	mappings [0..1]
 }
