@@ -1,0 +1,10 @@
+rule:={
+	version,
+	mapping
+}
+
+mapping:={
+	html:nameH1, //current node's html
+	attr:{attr1:nameA1,attr2:nameA2}, //current node's attributes
+	selector:nameS1/mapping //Descendant node's html or mapping
+}

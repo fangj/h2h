@@ -2,7 +2,7 @@
 	var html2data=function(html,mapping_rules){
 		mapping_rules=JSON.parse(mapping_rules);
 		var version=mapping_rules.version||1;
-		if(version>1){
+		if(version>2){
 			throw "no support version:"+version;
 		}
 		var mapping=mapping_rules.mapping||{};
