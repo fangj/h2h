@@ -17,13 +17,22 @@
 		var html    = compiled_template(data);
 		return html;
 	}
+	Handlebars.registerHelper('list', function(items, options) {
+	  var out = "<ul>";
+	  for(var i=0, l=items.length; i<l; i++) {
+	    out = out + "<li>" + options.fn(items[i]) + "</li>";
+	  }
+	  return out + "</ul>";
+	});
 </script>
 
 <script >
 	var html_old=$.ajax({ url: "html-old/old2.html", async: false}).responseText;
 	var mapping_rules=$.ajax({ url: "mapping-rules/rule2.json", async: false}).responseText;
 	var data=h2h.html2data(html_old,mapping_rules);
-	var template   = $.ajax({ url: "template/template1.html", async: false}).responseText;
+	console.log(data);
+	console.log(JSON.stringify(data));
+	var template   = $.ajax({ url: "template/template2.html", async: false}).responseText;
 	var html_new=h2h.data2html(data,template,handlebars_adapter);
 	$("#html-new").html(html_new);
 </script>

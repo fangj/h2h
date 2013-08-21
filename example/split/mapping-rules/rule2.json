@@ -2,10 +2,9 @@
 		"version":2,
 		"mapping":{
 			"a":{
-				  "attr":{
-				  	"href":"link"
-				  },
-				  "html":"title"
-				}
+				"name":"link",
+				"@href":"href",
+				"html":"html"
+			}
 		}
 	}
