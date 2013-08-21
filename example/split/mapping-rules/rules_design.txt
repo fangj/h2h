@@ -1,25 +1,34 @@
-rule:={
-	version,
-	mappings
+RULES:={
+	VERSION_PAIR,
+	MAPPINGS_PAIR
 }
 
-mappings:=[
-	mapping [1..*]
-]
+VERSION_PAIR:=
+	"version":version
 
-mapping:=[
-	selector:name
-]
+version:=INTEGER
 
-or
-
-mapping:=[
-	selector:sub_selector
-]	
-
-sub_selector:={
-	name,
-	html [0..1],
-	@attribute [0..*],
-	mappings [0..1]
+MAPPINGS_PAIR:=
+	"mapping":{
+		MAPPING_PAIR,
+		MAPPING_PAIR,
+		...
 }
+
+MAPPING_PAIR:=
+	SELECTOR:name 
+	||
+	SELECTOR:SUB_SELECTOR_DICT
+
+SELECTOR:=STRING
+name:=STRING
+
+SUB_SELECTOR_DICT:={
+	"name":name,
+	"html":html (optional, 0..1),
+	@attribute:name (optional, 0..*),
+	MAPPINGS_PAIR
+}
+
+html:STRING
+@attribute:STRING
