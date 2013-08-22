@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Html2Html Sample</title>
+	<script src="js/jquery-1.10.2.js"></script>
+	<script src="js/template_engine/microtmp.js" ></script>
+	<script src="js/jquery.xdomainajax.js"></script>
+	<script src="js/jquery.gridster.js"></script>
+	<link rel="stylesheet" href="css/jquery.gridster.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="html2html.js"></script>
+	
+
+
+</head>
+<body>
+
+
+
+
+<div id="html-new" />
+<script type="text/javascript">
+	var microtmp_adapter=function(data,template){
+		return tmpl(template, data);
+	};
+</script>
+
+<script >
+h2h.links2html("http://www.bbc.co.uk/news/"
+	,"mapping-rules/rule2.json"
+	,"template/template4.html"
+	,microtmp_adapter
+	,function(html_new){
+		$("#html-new").html(html_new);
+		$(".gridster ul").gridster({
+        widget_margins: [10, 10],
+        widget_base_dimensions: [140, 140]
+    	});
+	});
+   
+</script>
+
+</body>
+</html>
