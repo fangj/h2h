@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Html2Html Sample</title>
 	<script src="js/jquery-1.10.2.js"></script>
-	<script src="js/template_engine/handlebars.js" ></script>
+	<script src="js/template_engine/microtmp.js" ></script>
 	<script src="js/jquery.xdomainajax.js"></script>
 	<script src="html2html.js"></script>
 </head>
@@ -13,10 +13,8 @@
 <div id="html-new" />
 
 <script type="text/javascript">
-	var handlebars_adapter=function(data,template){
-		var compiled_template = Handlebars.compile(template);
-		var html    = compiled_template(data);
-		return html;
+	var microtmp_adapter=function(data,template){
+		return tmpl(template, data);
 	};
 </script>
 
@@ -24,7 +22,7 @@
 h2h.links2html("http://www.bbc.co.uk/news/"
 	,"mapping-rules/rule1.json"
 	,"template/template1.html"
-	,handlebars_adapter
+	,microtmp_adapter
 	,function(html_new){
 		$("#html-new").html(html_new);
 	});

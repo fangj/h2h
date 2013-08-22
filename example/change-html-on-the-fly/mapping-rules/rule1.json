@@ -1,7 +1,6 @@
 {
 		"version":1,
 		"mapping":{
-			".headline":"title",
-			".story":"body"
+			"#features-and-analysis-2":"block"
 		}
 	}
