@@ -83,6 +83,16 @@ More Examples
 -----------
 [change-html-on-the-fly](https://github.com/fangj/h2h/tree/master/example/change-html-on-the-fly) show how to extract content from [BBC News](http://www.bbc.co.uk/news/) and show in grid.
 
+Original Page
+
+![Original Page](img/old_html.png)
+
+Extract *Features* part to build New Page
+
+![New Page 1](img/new_html1.png)
+
+![New Page 2](img/new_html2.png)
+
 API
 -----------
 h2h.html2data(html,mapping_rules)
