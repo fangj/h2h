@@ -40,6 +40,7 @@
 		}
 	}
 	var data=h2h.html2data(html_old,mapping_rules);
+	console.log(data);
 	var template   = $("#entry-template").html();
 	var html_new=h2h.data2html(data,template,handlebars_adapter);
 	$("#html-new").html(html_new);

@@ -1,7 +1,7 @@
 {
-		"version":1,
-		"mapping":{
-			"h3":"title",
-			"code":"body"
-		}
+	"version":1,
+	"mapping":{
+		"h3":"title",
+		"code":"body"
 	}
+}
