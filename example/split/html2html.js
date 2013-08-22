@@ -5,19 +5,19 @@
 		if(version>2){
 			throw "no support version:"+version;
 		}
+		var mapping=mapping_rules.mapping||{};
+		var $html=$("<div/>").append(html);
 		switch(version){
-			case 1:return parseMappingRulesV1(html,mapping_rules);
-			case 2:return parseMappingRulesV2(html,mapping_rules);
+			case 1:return parseMappingRulesV1($html,mapping);
+			case 2:return parseMappingRulesV2($html,mapping);
 		}
 	};
 	var data2html=function(data,template,adapter){
 		return adapter(data,template);
 	};
 
-	var parseMappingRulesV1=function(html,mapping_rules){
-		var mapping=mapping_rules.mapping||{};
+	var parseMappingRulesV1=function($html,mapping){
 		var data={};
-		var $html=$("<div/>").append(html);
 		for(var selector in mapping){
 			var name=mapping[selector];
 			fillDataBySimpleSelector($html,selector,name,data);
@@ -32,10 +32,8 @@
 			data[name].push($(this).html());
 		})
 	};
-	var parseMappingRulesV2=function(html,mapping_rules){
-		var mapping=mapping_rules.mapping||{};
+	var parseMappingRulesV2=function($html,mapping){
 		var data={};
-		var $html=$("<div/>").append(html);
 		for(var selector in mapping){
 			var nameOrSubSelector=mapping[selector];
 			var name;
@@ -86,6 +84,12 @@
 				var aName=subSelector[key];
 				var attr=key.substr(1);
 				data[aName]=$part.attr(attr);
+			}else if("mapping"==key){
+				var sub_mapping=subSelector[key];
+				var sub_data=parseMappingRulesV2($part,sub_mapping);
+				for(var sub_name in sub_data){
+					data[sub_name]=sub_data[sub_name];//if the sub_name same as attribute name or "html". It will cause replace!
+				}
 			}
 		}
 		return data;

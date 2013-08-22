@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Html2Html Sample</title>
+	<script src="js/jquery-1.10.2.js"></script>
+	<script src="js/template_engine/microtmp.js" ></script>
+	<script src="html2html.js"></script>
+</head>
+<body>
+
+<div id="html-new" />
+
+<script type="text/javascript">
+	var microtmp_adapter=function(data,template){
+		return tmpl(template, data);
+	};
+</script>
+
+<script >
+	var html_old=$.ajax({ url: "html-old/old2.html", async: false}).responseText;
+	var mapping_rules=$.ajax({ url: "mapping-rules/rule2.json", async: false}).responseText;
+	var data=h2h.html2data(html_old,mapping_rules);
+	console.log(data);
+	console.log(JSON.stringify(data));
+	var template   = $.ajax({ url: "template/template3.html", async: false}).responseText;
+	var html_new=h2h.data2html(data,template,microtmp_adapter);
+	$("#html-new").html(html_new);
+</script>
+
+</body>
+</html>

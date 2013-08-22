@@ -1,0 +1,17 @@
+{
+		"version":2,
+		"mapping":{
+			"a":{
+				"name":"link",
+				"@href":"href",
+				"html":"html"
+			},
+			"#abc":{
+				"name":"nest_block",
+				"mapping":{
+					"#sub1":"sub1",
+					".sub2":"sub2"
+				}
+			}
+		}
+	}
