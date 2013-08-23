@@ -80,6 +80,8 @@
 			if("name"==key)continue;
 			else if("html"==key){
 				data["html"]=$part.html();
+			}else if("text"==key){
+				data["html"]=$part.text();
 			}else if("@"==key[0]){//attribute
 				var aName=subSelector[key];
 				var attr=key.substr(1);
@@ -144,11 +146,17 @@
 		results={};
 		downloadLinks(links,results,done);
   	};
+  	var setBase=function(href,doc){
+  		var base=doc.getElementsByTagName('base')[0]||doc.createElement('base');
+		base.href=href;
+		doc.head.appendChild(base);
+  	};
 	h2h={
 		html2data:html2data,
 		data2html:data2html,
 		html2html:html2html,
-		links2html:links2html
+		links2html:links2html,
+		setBase:setBase
 	};
 
 	outside.h2h=h2h;
