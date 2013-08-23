@@ -1,0 +1,12 @@
+{
+		"version":2,
+		"mapping":{
+			"#features-and-analysis-2  li":{
+				"name":"news",
+				"mapping":{
+					"h3":"title",
+					"p":"content"
+				}
+			}
+		}
+	}

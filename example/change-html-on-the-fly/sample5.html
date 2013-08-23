@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Html2Html Sample</title>
+	<script src="js/jquery-1.10.2.js"></script>
+	<script src="js/template_engine/microtmp.js" ></script>
+	<script src="js/jquery.xdomainajax.js"></script>
+	<script src="html2html.js"></script>
+</head>
+<body>
+
+<div id="html-new" />
+
+<script type="text/javascript">
+	var microtmp_adapter=function(data,template){
+		return tmpl(template, data);
+	};
+</script>
+
+<script >
+h2h.links2html("http://www.bbc.co.uk/news/"
+	,"mapping-rules/rule2.json"
+	,"template/template2.html"
+	,microtmp_adapter
+	,function(html_new){
+		$("#html-new").html(html_new);
+		h2h.setBase("http://www.bbc.co.uk/news/",document);
+	});
+</script>
+
+</body>
+</html>
